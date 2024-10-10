@@ -17,6 +17,7 @@ In this [preprint](https://arxiv.org/pdf/2410.02982v1), we describe the underlyi
 
 ## How does it work? :pencil2:
 
+To run the code with the simulated data in this example, please check the data generating mechanism: 
 <details>
   The data used for this example can be generated with this program: 
 
@@ -65,4 +66,82 @@ program define singlestudy, rclass
 end
 
 ```
+
+A number of studies can be generated as follows: 
+
+```ruby
+
+forv i = 1/5 {
+	singlestudy, study(`i') filename(study_`i')
+}
+
+```
+
 </details>
+
+### Analysis 1: No missing data (control)
+
+This analysis serves as a control approach to evaluate the performance of the imputation approach. Can we successfully recover (i.e., impute) missing covariates in a single example? 
+In the following examples, we work with `frames` in Stata. Even though we generate all data ourselves, we cannot pool the individual data to make the example as realistic as possible. 
+We can initiate the dataframe fr our analysis in Stata as follows:
+
+```ruby
+
+capture frame drop metadata
+frame create metadata 
+qui frame metadata:{ 
+	set obs 5 // number of studies
+	gen effect = .
+	gen se = .
+	gen study = .
+	gen size = .
+}  
+
+```
+
+Now, for each study in our data network, we perform the same analysis (federated analysis) and save the estimates for each study in the frame we initiated in the previous step.
+
+```ruby
+
+forv i = 1/5{
+	use study_`i', replace
+	logit y x c
+	local obs = _N
+	frame metadata:{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs'  if _n == `i'
+	}
+}
+
+```
+
+Finally, the estimates can be meta-analysed with a fixed or random meta-analytical model.
+
+```ruby
+
+frame metadata: list 
+frame metadata: meta set effect se , studysize(size)
+frame metadata: meta summarize,  eform fixed
+
+```
+
+#### Generate missing data to apply `mi impute from`
+
+After having conducted the control analysis, we can generate systematically missing data on the confounder Z in Study 4 and 5. 
+
+```ruby
+
+forv i = 4/5{
+	qui use study_`i', clear 
+	qui count 
+	di in red "Study `i': N = " r(N)
+	replace c = . 
+	save study_`i', replace
+}
+
+```
+
+
+
