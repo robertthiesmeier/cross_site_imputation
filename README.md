@@ -73,7 +73,7 @@ forv i = 1/5 {
 
 </details>
 
-### Control approach: No missing data
+### Control approach: No missing data :passport_control:
 
 This analysis serves as a control approach to evaluate the performance of the imputation approach. Can we successfully recover (i.e., impute) missing covariates in a single example? 
 In the following examples, we work with `frames` in Stata. Even though we generate all data ourselves, we cannot pool the individual data to make the example as realistic as possible. 
@@ -121,7 +121,7 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-#### Generate missing data to apply `mi impute from`
+#### Generate missing data to apply `mi impute from` :exclamation::heavy_exclamation_mark:
 
 After having conducted the control analysis, we can generate systematically missing data on the confounder C in Study 4 and 5. 
 
@@ -137,7 +137,7 @@ forv i = 4/5{
 
 ```
 
-### Approach 1: Federated analysis using 5 studies without adjustment for C
+### Approach :one: Federated analysis using 5 studies without adjustment for C
 
 In this analysis, we consider all studies, however, none of them incldues the adjustment for the confounder C.
 
@@ -160,7 +160,7 @@ frame metadata: meta set effect se , studysize(size)
 frame metadata: meta summarize,  eform fixed
 
 ```
-### Approach 2: Federated analysis using only studies with complete informtion on all variables
+### Approach :two: Federated analysis using only studies with complete informtion on all variables
 
 This approach takes into consideration 3/5 studies and disregards study 4 and 5 as a result of systematically missing data on C at these sites.
 
@@ -184,7 +184,7 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-### Approach 3: Federated analysis using all studies with complete and incomplete informtion on all variables
+### Approach :three: Federated analysis using all studies with complete and incomplete informtion on all variables
 
 In this approach we aim to include all studies in the analysis, regardless whether or not we are able to adjust for C in some of the studies with missing information. 
 First, we fit the fully-adjusted outcome model in study 1 to 3: 
@@ -230,7 +230,7 @@ frame metadata: meta summarize, eform fixed
 
 ```
 
-### Approach 4: Federated analysis using all studies and recovering the missing variable C.
+### Approach :four: Federated analysis using all studies and recovering the missing variable C.
 
 The next two approaches consider all studies and applying cross-site imputation to recoevr the variables with missing informations at sites where values are missing. In this approach, we consider a randomly selected study that has complete information on C (one out of the three studies) and fir the imputation model in that study. The imputation regression coefficients are then exported to text files that can be easily shared with other studies.
 
@@ -300,7 +300,7 @@ frame metadata: meta summarize, eform fixed
 
 ```
 
-### Approach 5: Federated analysis using all studies and recovering the missing variable C.
+### Approach :five: Federated analysis using all studies and recovering the missing variable C.
 
 In this approach, we also consider all five studies using cross-site imputation to recover missing values of C in Study 4 and 5. However, here we consider Study 1 to 3 to fit an imputaton model as opposed to only considering a single study as the basis for imputation. To do so, we first fit the imputation model in the studies with available data on the confounder C. 
 
@@ -374,10 +374,17 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
+## Wrap-up :white_check_mark:
+All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. Again, please refer to this preprint (add link here) for a detailed description of the steps and assumptions made that are pivotal to understand the concept of cross-site imputation.
+
 ## Further reading
+:label: The underlying imputation method and a simulation study are described in: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Systematically missing data in distributed data networks: multiple imputation when data cannot be pooled. Journal of Statistical Computation and Simulation, 1–19](https://doi.org/10.1080/00949655.2024.2404220)
 
+:label: The documentation of `mi impute from` is available here: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Imputing Missing Values with External Data](https://arxiv.org/pdf/2410.02982) 
 
+:label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
 
+:warning: If you find any error please notfiy us: robert.thiesmeier@ki.se
 
 
 
