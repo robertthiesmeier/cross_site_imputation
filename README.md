@@ -50,19 +50,6 @@ program define singlestudy, rclass
 	
 	gen study = `study'
 	if "`filename'" != "" qui save "`filename'", replace 
-	
-	// no adjustment for c
-	logit y x, or nolog
-	ret scalar b1_mod1 = _b[x]
-	ret scalar b1_se_mod1 = _se[x]
-	
-	// adjustment for c
-	logit y x c, or nolog
-	ret scalar b1_mod2 = _b[x]
-	ret scalar b1_se_mod2 = _se[x]
-	test x 
-	ret scalar pvalue = r(p)
-	
 end
 
 ```
@@ -129,7 +116,7 @@ frame metadata: meta summarize,  eform fixed
 
 #### Generate missing data to apply `mi impute from`
 
-After having conducted the control analysis, we can generate systematically missing data on the confounder Z in Study 4 and 5. 
+After having conducted the control analysis, we can generate systematically missing data on the confounder C in Study 4 and 5. 
 
 ```ruby
 
