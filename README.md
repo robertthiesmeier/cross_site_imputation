@@ -376,7 +376,9 @@ frame metadata: meta summarize,  eform fixed
 ```
 
 ## Wrap-up :white_check_mark:
-All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. Again, please refer to this preprint (add link here) for a detailed description of the steps and assumptions made that are pivotal to understand the concept of cross-site imputation.
+All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. 
+> [!IMPORTANT]
+> Again, please refer to this preprint (add link here) for a detailed description of the steps and assumptions made that are pivotal to understand the concept of cross-site imputation.
 
 ## Further reading
 :label: The underlying imputation method and a simulation study are described in: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Systematically missing data in distributed data networks: multiple imputation when data cannot be pooled. Journal of Statistical Computation and Simulation, 1–19](https://doi.org/10.1080/00949655.2024.2404220)
