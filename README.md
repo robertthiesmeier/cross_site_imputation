@@ -381,11 +381,11 @@ All five approaches can be implemented without the need for any real data and yo
 > Again, please refer to this preprint (add link here) for a detailed description of the steps and assumptions made that are pivotal to understand the concept of cross-site imputation.
 
 ## Further reading
-:label: The underlying imputation method and a simulation study are described in: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Systematically missing data in distributed data networks: multiple imputation when data cannot be pooled. Journal of Statistical Computation and Simulation, 1–19](https://doi.org/10.1080/00949655.2024.2404220)
+:label: The underlying imputation method and a simulation study are described in: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Systematically missing data in distributed data networks: multiple imputation when data cannot be pooled.](https://doi.org/10.1080/00949655.2024.2404220)
 
-:label: The documentation of `mi impute from` is available here: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Imputing Missing Values with External Data](https://arxiv.org/pdf/2410.02982) 
+:label: The documentation of `mi impute from` is available here: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Imputing Missing Values with External Data.](https://arxiv.org/pdf/2410.02982) 
 
-:label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
+:label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London.](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
 
 :warning: If you find any error please notfiy us: robert.thiesmeier@ki.se
 
