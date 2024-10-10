@@ -10,8 +10,8 @@ To impute missing data across study sites, we use the Stata package `mi impute f
 ```ruby
 ssc install mi_impute_from
 ```
-[!NOTE]
-In this [preprint](https://arxiv.org/pdf/2410.02982v1), we describe the underlying method and present the syntax of `mi impute from` alongside practical examples of missing data in collaborative research projects.
+> [!NOTE]
+> In this [preprint](https://arxiv.org/pdf/2410.02982v1), we describe the underlying method and present the syntax of `mi impute from` alongside practical examples of missing data in collaborative research projects.
 
 # Cross-site imputation 
 
