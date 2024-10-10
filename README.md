@@ -122,7 +122,7 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-#### Generate missing data to apply `mi impute from` :exclamation::heavy_exclamation_mark:
+#### Generate missing data to apply `mi impute from` :heavy_exclamation_mark:
 
 After having conducted the control analysis, we can generate systematically missing data on the confounder C in Study 4 and 5. 
 
