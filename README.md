@@ -17,9 +17,16 @@ In this [preprint](https://arxiv.org/pdf/2410.02982v1), we describe the underlyi
 
 ## How does it work? :pencil2:
 
-To run the code with the simulated data in this example, please check the data generating mechanism: 
+For simplicity, we consider three binary variables: an outcome, Y, and exposure, X, and a confounder C. The relations between the three variables is as follows: 
+
+![DAG_conf](https://github.com/user-attachments/assets/f5a3d195-dc43-4d09-b147-5d467fb01b04)
+
+To generate the data according to the outlined mechanism above, apply the following program:
+
 <details>
-  The data used for this example can be generated with this program: 
+## Data Generating Mechanism (DGM)
+
+To run the code with the simulated data in this example, please check the DGM. 
 
   ```ruby
 
@@ -35,7 +42,7 @@ program define singlestudy, rclass
 	local nobs = runiformint(500,10000)
 	qui set obs `nobs'
 	
-	local pc =  runiform(0.1, 0.5)
+	local pc =  runiform(0.1, 0.4)
 	gen c = rbinomial(1, `pc')
 	
 		
@@ -54,7 +61,7 @@ end
 
 ```
 
-A number of studies can be generated as follows: 
+We generate five studies according to the specified mechanism above: 
 
 ```ruby
 
