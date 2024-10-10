@@ -73,7 +73,7 @@ forv i = 1/5 {
 
 </details>
 
-### Analysis 1: No missing data (control)
+### Control approach: No missing data
 
 This analysis serves as a control approach to evaluate the performance of the imputation approach. Can we successfully recover (i.e., impute) missing covariates in a single example? 
 In the following examples, we work with `frames` in Stata. Even though we generate all data ourselves, we cannot pool the individual data to make the example as realistic as possible. 
@@ -136,6 +136,248 @@ forv i = 4/5{
 }
 
 ```
+
+### Approach 1: Federated analysis using 5 studies without adjustment for C
+
+In this analysis, we consider all studies, however, none of them incldues the adjustment for the confounder C.
+
+```ruby
+
+forv i = 1/5{
+	use study_`i', replace
+	logit y x
+	local obs = _N
+	frame metadata:{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs'  if _n == `i'
+	}
+}
+
+frame metadata: list 
+frame metadata: meta set effect se , studysize(size)
+frame metadata: meta summarize,  eform fixed
+
+```
+### Approach 2: Federated analysis using only studies with complete informtion on all variables
+
+This approach takes into consideration 3/5 studies and disregards study 4 and 5 as a result of systematically missing data on C at these sites.
+
+```ruby
+
+forv i = 1/3{
+	use study_`i', replace
+	logit y x c
+	local obs = _N
+	frame metadata:{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs'  if _n == `i'
+	}
+
+}
+
+frame metadata: meta set effect se , studysize(size)
+frame metadata: meta summarize,  eform fixed
+
+```
+
+### Approach 3: Federated analysis using all studies with complete and incomplete informtion on all variables
+
+In this approach we aim to include all studies in the analysis, regardless whether or not we are able to adjust for C in some of the studies with missing information. 
+First, we fit the fully-adjusted outcome model in study 1 to 3: 
+
+```ruby
+
+forv i = 1/3{
+	use study_`i', replace
+	logit y x c
+	local obs = _N
+	frame metadata: replace effect = _b[x] if _n == `i'
+	frame metadata: replace se = _se[x] if _n == `i'
+	frame metadata: replace study = `i' if _n == `i'
+	frame metadata: replace size = `obs'  if _n == `i'
+}
+
+```
+
+Second, we fit the model not adjusting for the confounding variable C in study 4 and 5. 
+
+```ruby
+
+forv i = 4/5{
+	use study_`i', replace
+	logit y x
+	local obs = _N
+		frame metadata:{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs' if _n == `i'
+	}
+}
+
+```
+
+Finally, we can again analyse all studies with a meta-analytical model.
+
+```ruby
+
+frame metadata: meta set effect se , studysize(size)
+frame metadata: meta summarize, eform fixed
+
+```
+
+### Approach 4: Federated analysis using all studies and recovering the missing variable C.
+
+The next two approaches consider all studies and applying cross-site imputation to recoevr the variables with missing informations at sites where values are missing. In this approach, we consider a randomly selected study that has complete information on C (one out of the three studies) and fir the imputation model in that study. The imputation regression coefficients are then exported to text files that can be easily shared with other studies.
+
+```ruby
+
+local pick = runiformint(1,3) 
+use study_`pick', clear
+	logit c y x
+ 
+	// export matrices 
+	mat ib = e(b)
+	mat iV = e(V)
+	svmat ib
+	qui export delimited ib* using b_study`pick'.txt in 1 , replace 
+	svmat iV 
+	qui export delimited iV* using v_study`pick'.txt if iV1 != . , replace 
+
+```
+
+At the study sites with missing data (Study 4 and Study 5), we import the regression coefficients and impute the issing values on C 10-times. A detailed explanation on this step can be found here (add link to im impute from). Finally, we fit the outcome model to each imputed dataset and combine the estimates with Rubin's rules.
+
+```ruby
+
+forv i = 4/5 {
+
+	use study_`i', clear 
+	mi set wide
+	mi register imputed c
+	
+	mi_impute_from_get, b(b_study`pick') v(v_study`pick') colnames(y x _cons) imodel(logit) 
+	mat ib = r(get_ib)
+	mat iV = r(get_iV)
+	
+	mi impute from c , add(10) b(ib) v(iV) imodel(logit)
+
+	mi estimate, post noi: logit y x c
+
+	local obs = _N
+	frame metadata:{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs'  if _n == `i'
+	}
+}
+
+```
+
+We have now estimates the C-adjusted effect of the exposure X on the outcome Y after imputing C in Study 4 and 5. Next, we can derive the estimates for Study 1 to 3 as we have done the in the previous steps and appky a meta-analysis to derive a single pooled estimate.
+
+```ruby
+
+forv i = 1/3{
+	use study_`i', replace
+	logit y x c
+	local obs = _N
+	frame metadata{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs'  if _n == `i'
+	}
+}
+
+frame metadata: meta set effect se , studysize(size)
+frame metadata: meta summarize, eform fixed
+
+```
+
+### Approach 5: Federated analysis using all studies and recovering the missing variable C.
+
+In this approach, we also consider all five studies using cross-site imputation to recover missing values of C in Study 4 and 5. However, here we consider Study 1 to 3 to fit an imputaton model as opposed to only considering a single study as the basis for imputation. To do so, we first fit the imputation model in the studies with available data on the confounder C. 
+
+```ruby
+
+forv i = 1/3 {
+	qui use study_`i', replace
+	qui logit c y x
+	mat ib = e(b)
+	mat iV = e(V)
+	svmat ib
+	qui export delimited ib* using b_study`i'.txt in 1 , replace 
+	svmat iV 
+	qui export delimited iV* using v_study`i'.txt if iV1 != . , replace 
+}
+
+local b_file "b_study1 b_study2 b_study3"
+local v_file "v_study1 v_study2 v_study3"
+
+```
+
+We save all files and transport them to the sites with missing data. Here, we proceed as outlined in Approach 4. The command `mi_impute_from_get` recognises multiple input files and takes a weighted average. 
+
+```ruby
+
+forv k = 4/5{
+	
+	// impute in study 4 & 5 
+	use study_`k', clear 
+		
+	mi set wide
+	mi register imputed c
+		
+	mat drop _all
+	mi_impute_from_get, b(`b_file') v(`v_file') colnames(y x _cons) imodel(logit) // weighted average is automatically taken
+	mat ib = r(get_ib)
+	mat iV = r(get_iV)
+	
+	mi impute from c , b(ib) v(iV) add(10) imodel(logit)
+	mi estimate, post noi: logit y x c
+
+	local obs = _N
+	frame metadata:{
+		replace effect = _b[x] if _n == `k'
+		replace se = _se[x] if _n == `k'
+		replace study = `k' if _n == `k'
+		replace size = `obs' if _n == `k'
+	}
+}
+
+```
+
+We add the estimates for the studies with complete data and apply a meta-analysis in the end. 
+
+```ruby
+
+forv i = 1/3{
+	use study_`i', replace
+	logit y x c
+	local obs = _N
+	frame metadata{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs'  if _n == `i'
+	}
+}
+
+frame metadata: meta set effect se , studysize(size)
+frame metadata: meta summarize,  eform fixed
+
+```
+
+## Further reading
+
+
+
 
 
 
