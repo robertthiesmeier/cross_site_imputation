@@ -24,7 +24,7 @@ For simplicity, we consider three binary variables: an outcome, Y, and exposure,
 To generate the data according to the outlined mechanism above, apply the following program:
 
 <details>
-**Data Generating Mechanism (DGM)
+**Data Generating Mechanism (DGM)**
 
 To run the code with the simulated data in this example, please check the DGM. 
 
