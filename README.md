@@ -167,6 +167,16 @@ This approach takes into consideration 3/5 studies and disregards study 4 and 5 
 
 ```ruby
 
+capture frame drop metadata
+frame create metadata 
+qui frame metadata:{ 
+	set obs 3
+	gen effect = .
+	gen se = .
+	gen study = .
+	gen size = .
+}  
+
 forv i = 1/3{
 	use study_`i', replace
 	logit y x c
@@ -191,6 +201,16 @@ In this approach we aim to include all studies in the analysis, regardless wheth
 First, we fit the fully-adjusted outcome model in study 1 to 3: 
 
 ```ruby
+
+capture frame drop metadata
+frame create metadata 
+qui frame metadata:{ 
+	set obs 5
+	gen effect = .
+	gen se = .
+	gen study = .
+	gen size = .
+}  
 
 forv i = 1/3{
 	use study_`i', replace
