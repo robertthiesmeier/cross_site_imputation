@@ -16,3 +16,53 @@ In this [preprint](https://arxiv.org/pdf/2410.02982v1), we describe the underlyi
 # Cross-site imputation 
 
 ## How does it work? :pencil2:
+
+<details>
+  The data used for this example can be generated with this program: 
+
+  ```ruby
+
+cap program drop singlestudy
+program define singlestudy, rclass
+
+	syntax /// 
+		[, nobs(real 1000) ///
+		study(real 1) ///
+		filename(string)]
+	
+	drop _all 
+	local nobs = runiformint(500,10000)
+	qui set obs `nobs'
+	
+	local pc =  runiform(0.1, 0.5)
+	gen c = rbinomial(1, `pc')
+	
+		
+	local a0 = runiform(0.05, 0.1)
+	local a1 = rnormal(ln(4), 0.1)	
+	gen x = rbinomial(1, invlogit(`a0'+`a1'*c))
+
+	local b0 = runiform(logit(0.05), logit(0.3))
+	local b1 = rnormal(ln(1.5), 0.1)
+	local b2 = rnormal(ln(4), 0.1)
+	gen y = rbinomial(1, invlogit(`b0'+`b1'*x+`b2'*c))
+	
+	gen study = `study'
+	if "`filename'" != "" qui save "`filename'", replace 
+	
+	// no adjustment for c
+	logit y x, or nolog
+	ret scalar b1_mod1 = _b[x]
+	ret scalar b1_se_mod1 = _se[x]
+	
+	// adjustment for c
+	logit y x c, or nolog
+	ret scalar b1_mod2 = _b[x]
+	ret scalar b1_se_mod2 = _se[x]
+	test x 
+	ret scalar pvalue = r(p)
+	
+end
+
+```
+</details>
