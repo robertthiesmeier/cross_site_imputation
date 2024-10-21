@@ -78,7 +78,7 @@ forv i = 1/5 {
 
 This analysis serves as a control approach to evaluate the performance of the imputation approach. Can we successfully recover (i.e., impute) missing covariates in a single example? 
 In the following examples, we work with `frames` in Stata. Even though we generate all data ourselves, we cannot pool the individual data to make the example as realistic as possible. 
-We can initiate the dataframe fr our analysis in Stata as follows:
+We can initiate the dataframe for our analysis in Stata as follows:
 
 ```ruby
 
@@ -140,7 +140,7 @@ forv i = 4/5{
 
 ### Approach :one: Federated analysis using 5 studies without adjustment for C
 
-In this analysis, we consider all studies, however, none of them incldues the adjustment for the confounder C.
+In this analysis, we consider all studies, however, none of them includes the adjustment for the confounder C.
 
 ```ruby
 
@@ -161,7 +161,7 @@ frame metadata: meta set effect se , studysize(size)
 frame metadata: meta summarize,  eform fixed
 
 ```
-### Approach :two: Federated analysis using only studies with complete informtion on all variables
+### Approach :two: Federated analysis using only studies with complete information on all variables
 
 This approach takes into consideration 3/5 studies and disregards study 4 and 5 as a result of systematically missing data on C at these sites.
 
@@ -195,10 +195,10 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-### Approach :three: Federated analysis using all studies with complete and incomplete informtion on all variables
+### Approach :three: Federated analysis using all studies with complete and incomplete information on all variables
 
-In this approach we aim to include all studies in the analysis, regardless whether or not we are able to adjust for C in some of the studies with missing information. 
-First, we fit the fully-adjusted outcome model in study 1 to 3: 
+In this approach we aim to include all studies in the analysis, regardless of whether or not we are able to adjust for C in some of the studies with missing information. 
+First, we fit the fully adjusted outcome model in study 1 to 3: 
 
 ```ruby
 
@@ -253,7 +253,7 @@ frame metadata: meta summarize, eform fixed
 
 ### Approach :four: Federated analysis using all studies and recovering the missing variable C.
 
-The next two approaches consider all studies and applying cross-site imputation to recoevr the variables with missing informations at sites where values are missing. In this approach, we consider a randomly selected study that has complete information on C (one out of the three studies) and fir the imputation model in that study. The imputation regression coefficients are then exported to text files that can be easily shared with other studies.
+The next two approaches consider all studies and applying cross-site imputation to recover the variables with missing information at sites where values are missing. In this approach, we consider a randomly selected study that has complete information on C (one out of the three studies) and fir the imputation model in that study. The imputation regression coefficients are then exported to text files that can be easily shared with other studies.
 
 ```ruby
 
@@ -271,7 +271,7 @@ use study_`pick', clear
 
 ```
 
-At the study sites with missing data (Study 4 and Study 5), we import the regression coefficients and impute the issing values on C 10-times. A detailed explanation on this step can be found here (add link to im impute from). Finally, we fit the outcome model to each imputed dataset and combine the estimates with Rubin's rules.
+At the study sites with missing data (Study 4 and Study 5), we import the regression coefficients and impute the missing values on C 10-times. A detailed explanation on this step can be found [here](https://github.com/robertthiesmeier/mi_impute_from.git). Finally, we fit the outcome model to each imputed dataset and combine the estimates with Rubin's rules.
 
 ```ruby
 
@@ -300,7 +300,7 @@ forv i = 4/5 {
 
 ```
 
-We have now estimates the C-adjusted effect of the exposure X on the outcome Y after imputing C in Study 4 and 5. Next, we can derive the estimates for Study 1 to 3 as we have done the in the previous steps and appky a meta-analysis to derive a single pooled estimate.
+We have now estimated the C-adjusted effect of the exposure X on the outcome Y after imputing C in Study 4 and 5. Next, we can derive the estimates for Study 1 to 3 as we have done the in the previous steps and apply a meta-analysis to derive a single pooled estimate.
 
 ```ruby
 
