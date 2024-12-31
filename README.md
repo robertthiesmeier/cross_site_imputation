@@ -398,16 +398,15 @@ frame metadata: meta summarize,  eform fixed
 ## Wrap-up :white_check_mark:
 All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. 
 > [!IMPORTANT]
-> Again, please refer to this preprint (add link here) for a detailed description of the steps and assumptions made that are pivotal to understand the concept of cross-site imputation.
+> Again, please refer to this [preprint](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1) for a more detailed description of the steps and assumptions made that are pivotal to understand the concept of cross-site imputation.
 
 ## Further reading
+:label: The idea of cross-site imputation, an applied example, and a discussion around the assumptions of the method are presented in: [Thiesmeier, R. Madley-Dowd, P. Orsini, N., Ahlqvist, V. (2024). Cross-site imputation for recovering variables without individual pooled data.](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf+html)
+
 :label: The underlying imputation method and a simulation study are described in: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Systematically missing data in distributed data networks: multiple imputation when data cannot be pooled.](https://doi.org/10.1080/00949655.2024.2404220)
 
 :label: The documentation of `mi impute from` is available here: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Imputing Missing Values with External Data.](https://arxiv.org/pdf/2410.02982) 
 
 :label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London.](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
 
-:warning: If you find any error please notfiy us: robert.thiesmeier@ki.se
-
-
-
+:warning: If you find any errors, please notfiy us: robert.thiesmeier@ki.se
