@@ -409,4 +409,6 @@ All five approaches can be implemented without the need for any real data and yo
 
 :label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London.](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
 
+:label: Cross-site imputation was presented at the Royal Statistical Society International Conference in Brighton, UK, in September 2024, and at the International Biometric Society Conference in Atlanta, GA, USA, in December 2024.
+
 :warning: If you find any errors, please notfiy us: robert.thiesmeier@ki.se
