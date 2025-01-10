@@ -407,6 +407,8 @@ All five approaches can be implemented without the need for any real data and yo
 
 :label: The documentation of `mi impute from` is available here: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Imputing Missing Values with External Data.](https://arxiv.org/pdf/2410.02982) 
 
+:label: The software package `mi impute from` in Stata is stored here: [Thiesmeier R, Bottai M, Orsini R. (2024). MI_IMPUTE_FROM: Stata module to impute using an external imputation model. Statistical Software Components S459378, Boston College Department of Economics](https://ideas.repec.org/c/boc/bocode/s459378.html)
+
 :label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London.](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
 
 :label: Cross-site imputation was presented at the Royal Statistical Society International Conference in Brighton, UK, in September 2024, and at the International Biometric Society Conference in Atlanta, GA, USA, in December 2024.
