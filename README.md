@@ -323,7 +323,8 @@ frame metadata: meta summarize, eform fixed
 
 ### Approach :five: Federated analysis using all studies and recovering the missing variable C.
 
-In this approach, we also consider all five studies using cross-site imputation to recover missing values of C in Study 4 and 5. However, here we consider Study 1 to 3 to fit an imputaton model as opposed to only considering a single study as the basis for imputation. To do so, we first fit the imputation model in the studies with available data on the confounder C. 
+In this approach, we also consider all five studies using cross-site imputation to recover missing values of C in Study 4 and 5. However, here we consider Study 1 to 3 to fit an imputaton model as opposed to only considering a single study as the basis for imputation. To do so, we first fit the imputation model in the studies with available data on the confounder C. After the first step (fitting the prediction model in the studies with available data), we save all files and transport them to the sites with missing data. Here, we proceed as outlined in Approach 4. The command `mi_impute_from_get` recognises multiple input files and takes a weighted average. 
+
 
 ```ruby
 
@@ -340,12 +341,6 @@ forv i = 1/3 {
 
 local b_file "b_study1 b_study2 b_study3"
 local v_file "v_study1 v_study2 v_study3"
-
-```
-
-We save all files and transport them to the sites with missing data. Here, we proceed as outlined in Approach 4. The command `mi_impute_from_get` recognises multiple input files and takes a weighted average. 
-
-```ruby
 
 forv k = 4/5{
 	
