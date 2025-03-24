@@ -342,6 +342,8 @@ forv i = 1/3 {
 local b_file "b_study1 b_study2 b_study3"
 local v_file "v_study1 v_study2 v_study3"
 
+// use the list of files in mi_impute_from_get
+
 forv k = 4/5{
 	
 	// impute in study 4 & 5 
