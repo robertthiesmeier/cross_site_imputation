@@ -464,12 +464,11 @@ forv t = 1/3 {
 	
 	forv i = 1/3 {
 		forv j = `i'/3 {   // triangular and diagonal elements of the matrix for the V matrix
-            local post_est_V_`t' "`post_est_V_`t'' (`=`get_v_`t''[`i',`j']')"
-        }
-    }
+            		local post_est_V_`t' "`post_est_V_`t'' (`=`get_v_`t''[`i',`j']')"
+        	}
+    	}
 	
 	qui frame post random_impmodel (`t') `post_est_b_`t'' `post_est_V_`t''
-	
 }
 
 ```
