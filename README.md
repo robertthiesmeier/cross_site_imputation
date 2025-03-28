@@ -439,11 +439,11 @@ forv i = 1/3 {
 We now imported all regression coefficients and their variance/covariances from the three prediction models. Next, we would like to take a random meta regression model of the three set of coefficients to derive our final imputation regression coefficients. In the previous examples, when multiple files were input, `mi_impute_from_get` faciliated a weighted average using inverse variance method. Here, we show how to facililate a random meta regression model to respect the statistical heterogenity between sites.
 
 <details>
+	
 ```ruby
 
-cap frame drop random_impmodel  
+capture frame drop random_impmodel  
 frame create random_impmodel study y1 y2 y3 v11 v12 v13 v22 v23 v33
-*frame random_impmodel: desc 
 
 forv t = 1/3 {
  
