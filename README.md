@@ -392,8 +392,13 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
+## Extension: Empirical heterogenity between study sites
+
+
 ## Wrap-up :white_check_mark:
-All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. 
+All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. In addition, we showed how to incorporate empirical heterogenity between the sites into the final imputation model by fitting a meta-regression model with random effects on the regression coefficients coming from multiple sites. This approach is explained in more detail in Resche-Rigon et al. (2018). 
+
+
 > [!IMPORTANT]
 > Again, please refer to this [preprint](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf) for a more detailed description of the steps and assumptions made that are pivotal to understand the concept of cross-site imputation.
 
@@ -409,5 +414,9 @@ All five approaches can be implemented without the need for any real data and yo
 :label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London.](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
 
 :label: Cross-site imputation was presented at the Royal Statistical Society International Conference in Brighton, UK, in September 2024, and at the International Biometric Society Conference in Atlanta, GA, USA, in December 2024.
+
+:label [Multiple imputation by chained equations for systematically and sporadically missing multilevel data](https://journals.sagepub.com/doi/10.1177/0962280216666564?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed) by Resche-Rigon M. and White I. illustarting the theoretical foundations of a two-stage imputation process for multilevel data. 
+
+:label A first introduction and illustration of [MI algorithms in distributed health data networks](https://www.nature.com/articles/s41467-020-19270-2) by Chang et al. (2020). 
 
 :warning: If you find any errors, please notfiy us: robert.thiesmeier@ki.se
