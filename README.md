@@ -1,8 +1,8 @@
-# Cross-site imputation to recover covariates without sharing individual-level pooled data
+# Cross-site imputation to recover covariates without in federated analyses without sharing individual-level pooled data
 On this site, we illustrate computer code to apply cross-site imputation. A preprint is available [here](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf). :page_facing_up:. All datasets are simulated, and you can try out the code and implementation of the software package yourself.
 
 ## What is the context? 
-Missing data is a common challenge across scientific disciplines. Current imputation methods require the availability of individual data to impute missing values. Often, however, missingness requires using external data for the imputation. Therefore, propose a new imputation approach - cross-site multiple imputation - designed to impute missing values using linear predictors and their related covariance matrix from imputation models estimated in one or multiple external studies. This allows for the imputation of any missing values without sharing individual data between studies. The idea was previously discussed [here](https://www.tandfonline.com/doi/full/10.1080/00949655.2024.2404220). In this short tutorial on cross-site imputation, we will work with the newly developed Stata code `mi impute from` that facilitates the imputation of missing values. 
+Missing data is a common challenge across scientific disciplines. Most of the currently implemnted imputation methods require the availability of individual data to impute missing values. Often, however, missingness requires using external data for the imputation. Therefore, propose a new imputation approach - cross-site multiple imputation - designed to impute missing values using linear predictors and their related covariance matrix from imputation models estimated in one or multiple external studies. This allows for the imputation of any missing values without sharing individual data between studies. The idea was previously discussed [here](https://www.tandfonline.com/doi/full/10.1080/00949655.2024.2404220). In this short tutorial on cross-site imputation, we will work with the newly developed Stata code `mi impute from` that facilitates the imputation of missing values. 
 
 ### Download `mi impute from` :computer:
 To impute missing data across study sites, we use the Stata package `mi impute from`. The command can be downloaded from the SSC Archive in Stata:
@@ -393,7 +393,48 @@ frame metadata: meta summarize,  eform fixed
 ```
 
 ## :high_brightness: Extension: Empirical heterogenity between study sites
-When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogenity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustartes this approach. 
+When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogenity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustrates this approach. First, as shown above, the imputation must be fit at all sites with complete data on the systematically missing confounder.
+
+```ruby
+
+*** fit imputation model in all studies with available data ***
+forv i = 1/3 {
+	qui use study_`i', replace
+	qui logit c y x
+	mat ib = e(b)
+	mat iV = e(V)
+	svmat ib
+	qui export delimited ib* using b_study`i'.txt in 1 , replace 
+	svmat iV 
+	qui export delimited iV* using v_study`i'.txt if iV1 != . , replace 
+}
+
+
+local b_file "b_study1 b_study2 b_study3"
+local v_file "v_study1 v_study2 v_study3"
+
+```
+We can send the .txt files to the sites with missing data. At the receiving site, we then have to transform the files into matrices. 
+
+```ruby
+
+** import 3 files with beta-coefficients from prediction model
+
+forv i = 1/3 {
+	tempname get_b_`i'
+	qui import delimited using "b_study`i'.txt", clear 
+	qui mkmat * , matrix(`get_b_`i'')	
+}
+
+** import the 3 files with the variance/covariance matrix from the prediction model
+
+forv i = 1/3 {
+	tempname get_v_`i'
+	qui import delimited using "v_study`i'.txt", clear 
+	qui mkmat *, matrix(`get_v_`i'')
+}
+
+```
 
 ## Wrap-up :white_check_mark:
 All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. In addition, we showed how to incorporate empirical heterogenity between the sites into the final imputation model by fitting a meta-regression model with random effects on the regression coefficients coming from multiple sites. This approach is explained in more detail in Resche-Rigon et al. (2018). 
