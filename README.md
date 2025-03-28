@@ -475,7 +475,7 @@ forv t = 1/3 {
 ```
 </details>
 
-▶️ Once we created a dataframe and organised the beta-coefficients and their variance/covariances, we can fit the meta regression model with random effects. 
+Once we created a dataframe and organised the beta-coefficients and their variance/covariances, we can fit the meta regression model with random effects. 
 
 ```ruby
 
@@ -483,9 +483,10 @@ frame random_impmodel: meta mvregress y* , wcovvariables(v*) random(reml, covari
 
 ```
 
-▶️ The outpur has to be cleaned up and organised a little bit to be used for `mi impute from`. (🕵️ Expand to see code shown in details)
+The output has to be cleaned up and organised a little bit to be used for `mi impute from`. (🕵️ Expand to see code shown in details)
 
 <details>
+	
 ```ruby
 	
 ** clean up the results to be used with mi impute from
@@ -500,9 +501,10 @@ mat li ib
 mat li iV
 
 ```
+
 </details>
 
-▶️ We can then proceed as previously, and use the final set of imputation coefficients to be used with `mi impute from`.
+We can then proceed as previously, and use the final set of imputation coefficients to be used with `mi impute from`.
 
 ```ruby
 
@@ -546,6 +548,7 @@ frame metadata: meta set effect se , studysize(size)
 frame metadata: meta summarize,  eform random(reml)
 
 ```
+
 ☑️ We now used the cross-site imputation approach allowing for heterogenity in the imputation model.
 
 ## Wrap-up :white_check_mark:
