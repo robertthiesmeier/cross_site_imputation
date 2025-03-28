@@ -2,10 +2,22 @@
 On this site, we illustrate computer code to apply cross-site imputation. A preprint is available [here](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf). :page_facing_up:. All datasets are simulated, and you can try out the code and implementation of the software package yourself.
 
 ## Table of Contents
-- [What is the context?](#what-is-the-context)
-  - [Download `mi impute from`](#download-mi-impute-from)
-- [Cross-site imputation](#cross-site-imputation)
-  - [How does it work?](#how-does-it-work)
+
+1. [Introduction](#introduction)
+2. [What is Cross-Site Imputation?](#what-is-cross-site-imputation)
+3. [How Cross-Site Imputation Works](#how-cross-site-imputation-works)
+   - [Data Generating Mechanism](#data-generating-mechanism)
+4. [Step-by-Step Tutorial on Cross-Site Imputation](#step-by-step-tutorial-on-cross-site-imputation)
+   - [1. Federated Analysis Without Missing Data](#federated-analysis-without-missing-data)
+   - [2. Federated Analysis Using Only Studies with Complete Information](#federated-analysis-using-only-studies-with-complete-information)
+   - [3. Federated Analysis Using All Studies](#federated-analysis-using-all-studies)
+   - [4. Federated Analysis Using Cross-Site Imputation to Recover Missing Data](#federated-analysis-using-cross-site-imputation-to-recover-missing-data)
+   - [5. Federated Analysis Using Cross-Site Imputation with Multiple Studies](#federated-analysis-using-cross-site-imputation-with-multiple-studies)
+5. [Empirical Heterogeneity Between Study Sites](#empirical-heterogeneity-between-study-sites)
+6. [Implementation of Cross-Site Imputation in Stata](#implementation-of-cross-site-imputation-in-stata)
+7. [Download and Install the `mi impute from` Package](#download-and-install-the-mi-impute-from-package)
+8. [References](#references)
+
 
 ## What is the context? 
 Missing data is a common challenge across scientific disciplines. Most of the currently implemnted imputation methods require the availability of individual data to impute missing values. Often, however, missingness requires using external data for the imputation. Therefore, propose a new imputation approach - cross-site multiple imputation - designed to impute missing values using linear predictors and their related covariance matrix from imputation models estimated in one or multiple external studies. This allows for the imputation of any missing values without sharing individual data between studies. The idea was previously discussed [here](https://www.tandfonline.com/doi/full/10.1080/00949655.2024.2404220). In this short tutorial on cross-site imputation, we will work with the newly developed Stata code `mi impute from` that facilitates the imputation of missing values. 
@@ -80,6 +92,7 @@ forv i = 1/5 {
 
 </details>
 
+## Implementing multiple approaches to address missing data in federated analyses
 ### Control approach: No missing data :passport_control:
 
 This analysis serves as a control approach to evaluate the performance of the imputation approach. Can we successfully recover (i.e., impute) missing covariates in a single example? 
