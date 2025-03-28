@@ -419,7 +419,9 @@ local b_file "b_study1 b_study2 b_study3"
 local v_file "v_study1 v_study2 v_study3"
 
 ```
-We can send the .txt files to the sites with missing data. At the receiving site, we then have to transform the files into matrices. 
+
+📧 We can send the .txt files to the sites with missing data. 
+At the receiving site, we then have to transform the files into matrices. 
 
 ```ruby
 
@@ -441,7 +443,8 @@ forv i = 1/3 {
 
 ```
 
-We now imported all regression coefficients and their variance/covariances from the three prediction models. Next, we would like to take a random meta regression model of the three set of coefficients to derive our final imputation regression coefficients. In the previous examples, when multiple files were input, `mi_impute_from_get` faciliated a weighted average using inverse variance method. Here, we show how to facililate a random meta regression model to respect the statistical heterogenity between sites.
+▶️ We now imported all regression coefficients and their variance/covariances from the three prediction models. 
+Next, we would like to take a random meta regression model of the three set of coefficients to derive our final imputation regression coefficients. In the previous examples, when multiple files were input, `mi_impute_from_get` faciliated a weighted average using inverse variance method. Here, we show how to facililate a random meta regression model to respect the statistical heterogenity between sites. (🕵️ Expand to see code shown in details)
 
 <details>
 	
@@ -470,14 +473,21 @@ forv t = 1/3 {
 }
 
 ```
-<details>
+</details>
 
-Once we created a dataframe and organised the beta-coefficients and their variance/covariances, we can fit the meta regression model with random effects. 
+▶️ Once we created a dataframe and organised the beta-coefficients and their variance/covariances, we can fit the meta regression model with random effects. 
 
 ```ruby
 
 frame random_impmodel: meta mvregress y* , wcovvariables(v*) random(reml, covariance(identity))
 
+```
+
+▶️ The outpur has to be cleaned up and organised a little bit to be used for `mi impute from`. (🕵️ Expand to see code shown in details)
+
+<details>
+```ruby
+	
 ** clean up the results to be used with mi impute from
 mat ib = e(b)[1, 1..3]
 mat colnames ib = y x _cons
@@ -490,8 +500,9 @@ mat li ib
 mat li iV
 
 ```
+</details>
 
-We can then proceed as previously, and use the final set of imputation coefficients to be used with `mi impute from`. 
+▶️ We can then proceed as previously, and use the final set of imputation coefficients to be used with `mi impute from`.
 
 ```ruby
 
@@ -517,7 +528,7 @@ forv k = 4/5{
 	}
 }
 
-** do the analysis for all studies with complete data
+** do the analysis for all studies with complete data and fit a final random-effects meta-analysis
 
 forv i = 1/3{
 	use study_`i', replace
@@ -535,7 +546,7 @@ frame metadata: meta set effect se , studysize(size)
 frame metadata: meta summarize,  eform random(reml)
 
 ```
-
+☑️ We now used the cross-site imputation approach allowing for heterogenity in the imputation model.
 
 ## Wrap-up :white_check_mark:
 All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. In addition, we showed how to incorporate empirical heterogenity between the sites into the final imputation model by fitting a meta-regression model with random effects on the regression coefficients coming from multiple sites. This approach is explained in more detail in Resche-Rigon et al. (2018). 
