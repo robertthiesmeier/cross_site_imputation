@@ -393,6 +393,7 @@ frame metadata: meta summarize,  eform fixed
 ```
 
 ## Extension: Empirical heterogenity between study sites
+When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogenity between the study sites. To account for these difefrences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustartes this approach. 
 
 
 ## Wrap-up :white_check_mark:
@@ -415,8 +416,8 @@ All five approaches can be implemented without the need for any real data and yo
 
 :label: Cross-site imputation was presented at the Royal Statistical Society International Conference in Brighton, UK, in September 2024, and at the International Biometric Society Conference in Atlanta, GA, USA, in December 2024.
 
-:label [Multiple imputation by chained equations for systematically and sporadically missing multilevel data](https://journals.sagepub.com/doi/10.1177/0962280216666564?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed) by Resche-Rigon M. and White I. illustarting the theoretical foundations of a two-stage imputation process for multilevel data. 
+:label: [Multiple imputation by chained equations for systematically and sporadically missing multilevel data](https://journals.sagepub.com/doi/10.1177/0962280216666564?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed) by Resche-Rigon M. and White I. illustarting the theoretical foundations of a two-stage imputation process for multilevel data. 
 
-:label A first introduction and illustration of [MI algorithms in distributed health data networks](https://www.nature.com/articles/s41467-020-19270-2) by Chang et al. (2020). 
+:label: A first introduction and illustration of [MI algorithms in distributed health data networks](https://www.nature.com/articles/s41467-020-19270-2) by Chang et al. (2020). 
 
 :warning: If you find any errors, please notfiy us: robert.thiesmeier@ki.se
