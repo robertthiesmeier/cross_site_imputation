@@ -9,6 +9,9 @@ mkdir cross_site_imputation
 
 cd "`path'/cross_site_imputation"
 
+*** install mi impute from ***
+ssc install mi_impute_from, replace
+
 ********************************************************************************
 
 *** generate data ***
