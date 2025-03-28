@@ -39,7 +39,7 @@ For simplicity, we consider three binary variables: an outcome, Y, and exposure,
 ![DAG_conf](https://github.com/user-attachments/assets/f5a3d195-dc43-4d09-b147-5d467fb01b04)
 
 > [!TIP]
-> To generate the data according to the outlined mechanism above and NOT use any real data, apply the DGM program below. This tutorial guides you through the code. For smooth implementation, consider running the attached file in this repository (
+> To generate the data according to the outlined mechanism above and NOT use any real data, apply the DGM program below. This tutorial guides you through the code. For smooth implementation, consider running the attached [file in this repository](cross_site_tutorial.do). 
 
 <details>
 **Data Generating Mechanism (DGM)**
