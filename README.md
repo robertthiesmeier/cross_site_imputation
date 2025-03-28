@@ -1,6 +1,14 @@
 # Cross-site imputation to recover covariates without in federated analyses without sharing individual-level pooled data
 On this site, we illustrate computer code to apply cross-site imputation. A preprint is available [here](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf). :page_facing_up:. All datasets are simulated, and you can try out the code and implementation of the software package yourself.
 
+## Table of Contents
+- [What is the context? ](##What is the context?)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## What is the context? 
 Missing data is a common challenge across scientific disciplines. Most of the currently implemnted imputation methods require the availability of individual data to impute missing values. Often, however, missingness requires using external data for the imputation. Therefore, propose a new imputation approach - cross-site multiple imputation - designed to impute missing values using linear predictors and their related covariance matrix from imputation models estimated in one or multiple external studies. This allows for the imputation of any missing values without sharing individual data between studies. The idea was previously discussed [here](https://www.tandfonline.com/doi/full/10.1080/00949655.2024.2404220). In this short tutorial on cross-site imputation, we will work with the newly developed Stata code `mi impute from` that facilitates the imputation of missing values. 
 
