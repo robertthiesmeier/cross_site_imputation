@@ -466,7 +466,70 @@ forv t = 1/3 {
 
 ```
 
-<details>
+Once we created a dataframe and organised the beta-coefficients and their variance/covariances, we can fit the meta regression model with random effects. 
+
+```ruby
+
+frame random_impmodel: meta mvregress y* , wcovvariables(v*) random(reml, covariance(identity))
+
+** clean up the results to be used with mi impute from
+mat ib = e(b)[1, 1..3]
+mat colnames ib = y x _cons
+
+mat iV = e(V)[1..3, 1..3]
+mat colnames iV = y x _cons
+mat rownames iV = y x _cons
+
+mat li ib 
+mat li iV
+
+```
+
+We can then proceed as previously, and use the final set of imputation coefficients to be used with `mi impute from`. 
+
+```ruby
+
+** use the matrices in the studies with incomplete data
+
+forv k = 4/5{
+	
+	// impute in study 4 & 5 
+	use study_`k', clear 
+		
+	mi set wide
+	mi register imputed c
+		
+	mi impute from c , b(ib) v(iV) add(10) imodel(logit)
+	mi estimate, post noi: logit y x c
+
+	local obs = _N
+	frame metadata:{
+		replace effect = _b[x] if _n == `k'
+		replace se = _se[x] if _n == `k'
+		replace study = `k' if _n == `k'
+		replace size = `obs' if _n == `k'
+	}
+}
+
+** do the analysis for all studies with complete data
+
+forv i = 1/3{
+	use study_`i', replace
+	logit y x c
+	local obs = _N
+	frame metadata{
+		replace effect = _b[x] if _n == `i'
+		replace se = _se[x] if _n == `i'
+		replace study = `i' if _n == `i'
+		replace size = `obs'  if _n == `i'
+	}
+}
+
+frame metadata: meta set effect se , studysize(size)
+frame metadata: meta summarize,  eform random(reml)
+
+```
+
 
 ## Wrap-up :white_check_mark:
 All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. In addition, we showed how to incorporate empirical heterogenity between the sites into the final imputation model by fitting a meta-regression model with random effects on the regression coefficients coming from multiple sites. This approach is explained in more detail in Resche-Rigon et al. (2018). 
