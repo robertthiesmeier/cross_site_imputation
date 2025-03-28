@@ -6,16 +6,14 @@ On this site, we illustrate computer code to apply cross-site imputation. A prep
 1. [Introduction](#introduction)
 2. [Cross-site imputation](#Cross-site-imputation)
 3. [Step-by-step tutorial](#step-by-step-tutorial)
-   - [Federated Analysis Without Missing Data](#Control-approach-:-Federated-analysis-without-missing-data)
-   - [Federated Analysis Using Only Studies with Complete Information](#federated-analysis-using-only-studies-with-complete-information)
-   - [Federated Analysis Using All Studies](#federated-analysis-using-all-studies)
-   - [Federated Analysis Using Cross-Site Imputation to Recover Missing Data](#federated-analysis-using-cross-site-imputation-to-recover-missing-data)
-   - [Federated Analysis Using Cross-Site Imputation with Multiple Studies](#federated-analysis-using-cross-site-imputation-with-multiple-studies)
-5. [Empirical Heterogeneity Between Study Sites](#empirical-heterogeneity-between-study-sites)
-6. [Implementation of Cross-Site Imputation in Stata](#implementation-of-cross-site-imputation-in-stata)
-7. [Download and Install the `mi impute from` Package](#download-and-install-the-mi-impute-from-package)
-8. [References](#references)
-
+   - [Full data analysis](#Full-data-analysis)
+   - [Unadjusted pooled estimate](#Unadjusted-pooled-estimate)
+   - [Adjusted complete case analysis](#Adjusted-complete-case-analysis)
+   - [Adjusted for available data estimate](#Adjusted-for-available-data-estimate)
+   - [Single study imputation adjusted pooled estimate](#single-study-imputation-adjusted-pooled-estimate)
+   - [Multiple study imputation adjusted pooled estimate](#Multiple-study-imputation-adjusted-pooled-estimate)
+5. [Empirical heterogenity between study sites](#Empirical-heterogenity-between-study-sites)
+6. [Further reading](#Further-reading)
 
 
 ## Introduction
@@ -93,7 +91,9 @@ forv i = 1/5 {
 </details>
 
 ## Step-by-step tutorial
-### Control approach: Federated analysis without missing data :passport_control:
+### Full data analysis
+
+❗ The control approach :passport_control: Federated analysis without missing data 
 
 This analysis serves as a control approach to evaluate the performance of the imputation approach. Can we successfully recover (i.e., impute) missing covariates in a single example? 
 In the following examples, we work with `frames` in Stata. Even though we generate all data ourselves, we cannot pool the individual data to make the example as realistic as possible. 
@@ -141,9 +141,9 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-#### Generate missing data to apply `mi impute from` :heavy_exclamation_mark:
+#### Generate missing data 
 
-After having conducted the control analysis, we can generate systematically missing data on the confounder C in Study 4 and 5. 
+:heavy_exclamation_mark: After having conducted the control analysis, we can generate systematically missing data on the confounder C in Study 4 and 5. 
 
 ```ruby
 
@@ -157,8 +157,9 @@ forv i = 4/5{
 
 ```
 
-### Approach :one: Federated analysis using 5 studies without adjustment for C
+### Unadjusted pooled estimate
 
+Approach :one: Federated analysis using 5 studies without adjustment for C
 In this analysis, we consider all studies, however, none of them includes the adjustment for the confounder C.
 
 ```ruby
@@ -180,8 +181,8 @@ frame metadata: meta set effect se , studysize(size)
 frame metadata: meta summarize,  eform fixed
 
 ```
-### Approach :two: Federated analysis using only studies with complete information on all variables
-
+### Adjusted complete case analysis
+Approach :two: Federated analysis using only studies with complete information on all variables
 This approach takes into consideration 3/5 studies and disregards study 4 and 5 as a result of systematically missing data on C at these sites.
 
 ```ruby
@@ -214,8 +215,9 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-### Approach :three: Federated analysis using all studies with complete and incomplete information on all variables
+### Adjusted for available data estimate
 
+Approach :three: Federated analysis using all studies with complete and incomplete information on all variables
 In this approach we aim to include all studies in the analysis, regardless of whether or not we are able to adjust for C in some of the studies with missing information. 
 First, we fit the fully adjusted outcome model in study 1 to 3: 
 
@@ -270,7 +272,8 @@ frame metadata: meta summarize, eform fixed
 
 ```
 
-### Approach :four: Federated analysis using all studies and recovering the missing variable C.
+### Single study imputation adjusted pooled estimate
+Approach :four: Federated analysis using all studies and recovering the missing variable C.
 
 The next two approaches consider all studies and applying cross-site imputation to recover the variables with missing information at sites where values are missing. In this approach, we consider a randomly selected study that has complete information on C (one out of the three studies) and fir the imputation model in that study. The imputation regression coefficients are then exported to text files that can be easily shared with other studies.
 
@@ -340,7 +343,8 @@ frame metadata: meta summarize, eform fixed
 
 ```
 
-### Approach :five: Federated analysis using all studies and recovering the missing variable C.
+### Multiple study imputation adjusted pooled estimate
+Approach :five: Federated analysis using all studies and recovering the missing variable C.
 
 In this approach, we also consider all five studies using cross-site imputation to recover missing values of C in Study 4 and 5. However, here we consider Study 1 to 3 to fit an imputaton model as opposed to only considering a single study as the basis for imputation. To do so, we first fit the imputation model in the studies with available data on the confounder C. After the first step (fitting the prediction model in the studies with available data), we save all files and transport them to the sites with missing data. Here, we proceed as outlined in Approach 4. The command `mi_impute_from_get` recognises multiple input files and takes a weighted average. 
 
@@ -411,7 +415,8 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-## :high_brightness: Extension: Empirical heterogenity between study sites
+## Empirical heterogenity between study sites
+:high_brightness: Extension to Approach 5 (using multiple prediction models to impute the missing confounder).
 When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogenity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustrates this approach. 
 
 > [!TIP]
