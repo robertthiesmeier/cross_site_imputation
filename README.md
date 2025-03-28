@@ -393,8 +393,7 @@ frame metadata: meta summarize,  eform fixed
 ```
 
 ## :high_brightness: Extension: Empirical heterogenity between study sites
-When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogenity between the study sites. To account for these difefrences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustartes this approach. 
-
+When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogenity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustartes this approach. 
 
 ## Wrap-up :white_check_mark:
 All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. In addition, we showed how to incorporate empirical heterogenity between the sites into the final imputation model by fitting a meta-regression model with random effects on the regression coefficients coming from multiple sites. This approach is explained in more detail in Resche-Rigon et al. (2018). 
