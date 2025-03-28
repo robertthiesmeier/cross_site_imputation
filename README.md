@@ -422,10 +422,10 @@ frame metadata: meta summarize,  eform fixed
 
 ```
 
-## Empirical heterogenity between study sites
+## Empirical heterogeneity between study sites
 :high_brightness: Extension to Approach 5 (using multiple prediction models to impute the missing confounder) :high_brightness:
 
-When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogenity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustrates this approach. 
+When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogeneity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustrates this approach. 
 
 > [!TIP]
 > In the following section, we walk you through the code. For smooth implemntation, refer to the do.file and run everything in one go to avoid any error messages.
@@ -476,7 +476,7 @@ forv i = 1/3 {
 ```
 
 ▶️ We now imported all regression coefficients and their variance/covariances from the three prediction models. 
-Next, we would like to take a random meta regression model of the three set of coefficients to derive our final imputation regression coefficients. In the previous examples, when multiple files were input, `mi_impute_from_get` faciliated a weighted average using inverse variance method. Here, we show how to facililate a random meta regression model to respect the statistical heterogenity between sites. (🕵️ Expand to see code shown in details)
+Next, we would like to take a random meta regression model of the three set of coefficients to derive our final imputation regression coefficients. In the previous examples, when multiple files were input, `mi_impute_from_get` facilitated a weighted average using inverse variance method. Here, we show how to facilitate a random meta regression model to respect the statistical heterogeneity between sites. (🕵️ Expand to see code shown in details)
 
 <details>
 	
@@ -506,7 +506,7 @@ forv t = 1/3 {
 ```
 </details>
 
-Once we created a dataframe and organised the beta-coefficients and their variance/covariances, we can fit the meta regression model with random effects. 
+Once we created a dataframe and organised the beta-coefficients and their variance/covariances, we can fit a meta regression model with random effects. 
 
 ```ruby
 
@@ -514,7 +514,7 @@ frame random_impmodel: meta mvregress y* , wcovvariables(v*) random(reml, covari
 
 ```
 
-The output has to be cleaned up and organised a little bit to be used for `mi impute from`. (🕵️ Expand to see code shown in details)
+The output has to be cleaned up and organised a little bit to be used for `mi impute from`. (🕵️ Expand to see the code shown in details)
 
 <details>
 	
@@ -535,7 +535,7 @@ mat li iV
 
 </details>
 
-We can then proceed as previously, and use the final set of imputation coefficients to be used with `mi impute from`.
+We can now proceed as shown above. We use the final set of imputation coefficients in the `mi impute from` package.
 
 ```ruby
 
@@ -580,7 +580,7 @@ frame metadata: meta summarize,  eform random(reml)
 
 ```
 
-☑️ We now used the cross-site imputation approach allowing for heterogenity in the imputation model.
+☑️ We now used the cross-site imputation approach allowing for heterogeneity in the imputation model.
 
 ## Wrap-up :white_check_mark:
 All five approaches can be implemented without the need for any real data and you can test the package `mi impute from`. In addition, we showed how to incorporate empirical heterogenity between the sites into the final imputation model by fitting a meta-regression model with random effects on the regression coefficients coming from multiple sites. This approach is explained in more detail in Resche-Rigon et al. (2018). 
