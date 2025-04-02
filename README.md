@@ -1,5 +1,6 @@
 # Cross-site imputation to recover covariates without in federated analyses without sharing individual-level pooled data
-On this site, we illustrate computer code to apply cross-site imputation. A preprint is available [here](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf). :page_facing_up:. All datasets are simulated, and you can try out the code and implementation of the software package yourself. 
+
+This repository offers a tutorial to implement cross-site imputation for systematically missing variables in distributed data networks. A preprint is available [here](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf). :page_facing_up:. All datasets are simulated, and you can try out the code and implementation of the software package yourself. 
 🕵️‍♀️ This site walks you through the different approaches presented in this [paper](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf). 
 
 ## What you can find on this page 📖
