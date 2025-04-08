@@ -161,7 +161,9 @@ forv i = 4/5{
 
 ### Unadjusted pooled estimate
 
-Approach :one: Federated analysis using 5 studies without adjustment for C.
+Approach :one: 
+
+Federated analysis using 5 studies without adjustment for C
 
 In this analysis, we consider all studies, however, none of them includes the adjustment for the confounder C.
 
@@ -186,7 +188,9 @@ frame metadata: meta summarize,  eform fixed
 ```
 ### Adjusted complete case analysis
 
-Approach :two: Federated analysis using only studies with complete information on all variables.
+Approach :two: 
+
+Federated analysis using only studies with complete information on all variables
 
 This approach takes into consideration 3/5 studies and disregards study 4 and 5 as a result of systematically missing data on C at these sites.
 
@@ -222,7 +226,9 @@ frame metadata: meta summarize,  eform fixed
 
 ### Adjusted for available data estimate
 
-Approach :three: Federated analysis using all studies with complete and incomplete information on all variables.
+Approach :three: 
+
+Federated analysis using all studies with complete and incomplete information on all variables
 
 In this approach we aim to include all studies in the analysis, regardless of whether or not we are able to adjust for C in some of the studies with missing information. 
 First, we fit the fully adjusted outcome model in study 1 to 3: 
@@ -280,7 +286,9 @@ frame metadata: meta summarize, eform fixed
 
 ### Single study imputation adjusted pooled estimate
 
-Approach :four: Federated analysis using all studies and recovering the missing variable C.
+Approach :four: 
+
+Federated analysis using all studies and recovering the missing variable C
 
 The next two approaches consider all studies and applying cross-site imputation to recover the variables with missing information at sites where values are missing. In this approach, we consider a randomly selected study that has complete information on C (one out of the three studies) and fir the imputation model in that study. The imputation regression coefficients are then exported to text files that can be easily shared with other studies.
 
@@ -352,7 +360,9 @@ frame metadata: meta summarize, eform fixed
 
 ### Multiple study imputation adjusted pooled estimate
 
-Approach :five: Federated analysis using all studies and recovering the missing variable C.
+Approach :five: 
+
+Federated analysis using all studies and recovering the missing variable C
 
 In this approach, we also consider all five studies using cross-site imputation to recover missing values of C in Study 4 and 5. However, here we consider Study 1 to 3 to fit an imputaton model as opposed to only considering a single study as the basis for imputation. To do so, we first fit the imputation model in the studies with available data on the confounder C. After the first step (fitting the prediction model in the studies with available data), we save all files and transport them to the sites with missing data. Here, we proceed as outlined in Approach 4. The command `mi_impute_from_get` recognises multiple input files and takes a weighted average. 
 
