@@ -14,7 +14,7 @@ This repository offers a tutorial to implement cross-site imputation for systema
    - [Adjusted for available data estimate](#Adjusted-for-available-data-estimate)
    - [Single study imputation adjusted pooled estimate](#single-study-imputation-adjusted-pooled-estimate)
    - [Multiple study imputation adjusted pooled estimate](#Multiple-study-imputation-adjusted-pooled-estimate)
-5. [Empirical heterogenity between study sites](#Empirical-heterogenity-between-study-sites)
+5. [Empirical heterogeneity between study sites](#Empirical-heterogeneity-between-study-sites)
 6. [Further reading](#Further-reading)
 
 
