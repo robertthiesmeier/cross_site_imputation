@@ -429,7 +429,7 @@ frame metadata: meta summarize,  eform fixed
 When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogeneity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustrates this approach. 
 
 > [!TIP]
-> In the following section, we walk you through the code. For smooth implemntation, refer to the do.file and run everything in one go to avoid any error messages.
+> In the following section, we walk you through the code. For a smooth implemntation, refer to the do.file and run everything in one go to avoid any error messages.
 
 First, as shown above, the imputation must be fit at all sites with complete data on the systematically missing confounder.
 
