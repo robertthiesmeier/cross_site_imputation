@@ -424,7 +424,7 @@ frame metadata: meta summarize,  eform fixed
 ```
 
 ## Empirical heterogeneity between study sites
-:high_brightness: Extension to Approach 5 (using multiple prediction models to impute the missing confounder) :high_brightness:
+:high_brightness: Extension to Approach :five: (using multiple prediction models to impute the missing confounder) :high_brightness:
 
 When multiple studies are used to fit the prediction model, it is often desirable to account for the statistical (i.e., empirical) heterogeneity between the study sites. To account for these differences in the final imputation model, we can fit a meta-regression model with random effects combining the regression coefficients from multiple studies. The example below illustrates this approach. 
 
