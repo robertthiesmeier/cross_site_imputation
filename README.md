@@ -599,7 +599,7 @@ All five approaches can be implemented without the need for any real data and yo
 
 :label: The software package `mi impute from` in Stata is stored here: [Thiesmeier R, Bottai M, Orsini R. (2024). MI_IMPUTE_FROM: Stata module to impute using an external imputation model. Statistical Software Components S459378, Boston College Department of Economics](https://ideas.repec.org/c/boc/bocode/s459378.html)
 
-:label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London.](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf)
+:label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf) and at the [2025 Stata Biostatistics and Epidemiology Virtual Symposium](https://www.stata.com/symposiums/biostatistics-and-epidemiology25/presentations/Bio25_Thiesmeier.pdf).
 
 :label: Cross-site imputation was presented at the Royal Statistical Society International Conference in Brighton, UK, in September 2024, and at the International Biometric Society Conference in Atlanta, GA, USA, in December 2024.
 
