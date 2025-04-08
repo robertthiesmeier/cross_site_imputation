@@ -592,30 +592,31 @@ All five approaches can be implemented without the need for any real data and yo
 
 ## Further reading
 
-📚 **References** 
+📚 **References** 📚
 
-:label: The idea of cross-site imputation, an applied example, and a discussion around the assumptions of the method are presented in: [Thiesmeier, R. Madley-Dowd, P. Orsini, N., Ahlqvist, V. (2024). Cross-site imputation for recovering variables without individual pooled data.](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf+html)
+🔖 The idea of cross-site imputation, an applied example, and a discussion around the assumptions of the method are presented in: [Thiesmeier, R. Madley-Dowd, P. Orsini, N., Ahlqvist, V. (2024). Cross-site imputation for recovering variables without individual pooled data.](https://www.medrxiv.org/content/10.1101/2024.12.19.24319364v1.full.pdf+html)
 
-:label: The underlying imputation method and a simulation study are described in: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Systematically missing data in distributed data networks: multiple imputation when data cannot be pooled. Journal of Computational Statistics and Simulation, 94(17), 3807–3825](https://doi.org/10.1080/00949655.2024.2404220)
+🔖 The underlying imputation method and a simulation study are described in: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Systematically missing data in distributed data networks: multiple imputation when data cannot be pooled. Journal of Computational Statistics and Simulation, 94(17), 3807–3825](https://doi.org/10.1080/00949655.2024.2404220)
 
-:label: [Multiple imputation by chained equations for systematically and sporadically missing multilevel data](https://journals.sagepub.com/doi/10.1177/0962280216666564?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed) by Resche-Rigon M. and White I. illustarting the theoretical foundations of a two-stage imputation process for multilevel data. 
+🔖 [Multiple imputation by chained equations for systematically and sporadically missing multilevel data](https://journals.sagepub.com/doi/10.1177/0962280216666564?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed) by Resche-Rigon M. and White I. illustarting the theoretical foundations of a two-stage imputation process for multilevel data. 
 
-:label: A first introduction and illustration of [MI algorithms in distributed health data networks](https://www.nature.com/articles/s41467-020-19270-2) by Chang et al. (2020). 
+🔖 A first introduction and illustration of [MI algorithms in distributed health data networks](https://www.nature.com/articles/s41467-020-19270-2) by Chang et al. (2020). 
 
-🖥️ **Software**
+🖥️ **Software** 🖥️
 
-:label: The documentation of `mi impute from` is available here: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Imputing Missing Values with External Data.](https://arxiv.org/pdf/2410.02982) 
+:label: The documentation of `mi impute from` is available as a preprint: [Thiesmeier, R., Bottai, M., & Orsini, N. (2024). Imputing Missing Values with External Data.](https://arxiv.org/pdf/2410.02982) 
 
-:label: The software package `mi impute from` in Stata is stored here: [Thiesmeier R, Bottai M, Orsini R. (2024). MI_IMPUTE_FROM: Stata module to impute using an external imputation model. Statistical Software Components S459378, Boston College Department of Economics](https://ideas.repec.org/c/boc/bocode/s459378.html)
+:label: The software package `mi impute from` in Stata is stored at: [Thiesmeier R, Bottai M, Orsini R. (2024). MI_IMPUTE_FROM: Stata module to impute using an external imputation model. Statistical Software Components S459378, Boston College Department of Economics](https://ideas.repec.org/c/boc/bocode/s459378.html)
 
-📢 **Presentations**
-
-:label: The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf) and at the [2025 Stata Biostatistics and Epidemiology Virtual Symposium](https://www.stata.com/symposiums/biostatistics-and-epidemiology25/presentations/Bio25_Thiesmeier.pdf).
+📢 **Presentations** 📢
 
 :label: Theoretical underpinnings of cross-site imputation were presneted at the: 
 1. Royal Statistical Society International Conference in Harrogate, UK, 2023
 2. Royal Statistical Society International Conference in Brighton, UK, 2024
 3. International Biometric Society Conference in Atlanta, GA, USA, 2024
+
+The first version of `mi impute from` was presented at the [2024 UK Stata Conference in London](https://www.stata.com/meeting/uk24/slides/UK24_Orsini.pdf) and at the [2025 Stata Biostatistics and Epidemiology Virtual Symposium](https://www.stata.com/symposiums/biostatistics-and-epidemiology25/presentations/Bio25_Thiesmeier.pdf).
+
 
 
 :warning: If you find any errors, please notfiy us: robert.thiesmeier@ki.se :warning: 
