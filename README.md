@@ -454,7 +454,7 @@ local v_file "v_study1 v_study2 v_study3"
 ```
 
 📧 We can send the .txt files to the sites with missing data. 
-At the receiving site, we then have to transform the files into matrices. 
+At the receiving site: Transform the files into matrices. 
 
 ```ruby
 
@@ -477,7 +477,7 @@ forv i = 1/3 {
 ```
 
 ▶️ We now imported all regression coefficients and their variance/covariances from the three prediction models. 
-Next, we would like to take a random meta regression model of the three set of coefficients to derive our final imputation regression coefficients. In the previous examples, when multiple files were input, `mi_impute_from_get` facilitated a weighted average using inverse variance method. Here, we show how to facilitate a random meta regression model to respect the statistical heterogeneity between sites. (🕵️ Expand to see code shown in details)
+Next, we would like to take a random meta regression model of the three set of coefficients to derive our final imputation regression coefficients. In the previous examples, when multiple files were input, `mi_impute_from_get` facilitated a weighted average using the inverse variance method. Now, we illustrate how to fit a random meta regression model to respect the statistical heterogeneity between sites. (🕵️ Expand to see code shown in details)
 
 <details>
 	
